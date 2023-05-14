@@ -59,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
         is_attr_or_dict = usr_args['attr_or_dict']
 
         attr_val = ""
-        if method == "update" and attr_or_dict:
+        if method == "update" and is_attr_or_dict:
             match = re.search('^({.*})$', is_attr_or_dict)
             if match:
                 self.update_current_dict(classname, uid, match.group(1))
