@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
         if method == "update" and is_attr_or_dict:
             match = re.search('^({.*})$', is_attr_or_dict)
             if match:
-                self.update_current_dict(classname, uid, match.group(1))
+                self.update_from_dict(classname, uid, match.group(1))
                 return ""
             match_attr_val = re.search(
                 '^(?:"([^"]*)")?(?:, (.*))?$', is_attr_or_dict)
@@ -182,7 +182,8 @@ class HBNBCommand(cmd.Cmd):
             self.display("class name missing")
             return
 
-        match = re.match(r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?', line)
+        r = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
+        match = re.search(r, line)
         if not match:
             self.display("class name missing")
             return
@@ -229,6 +230,30 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(storage.all()[key], attribute, value)
         storage.all()[key].save()
+
+    def update_from_dict(self, classname, uid, input_dict):
+        """
+        Updates an instance based on its ID with a dictionary
+        """
+        string = input_dict.replace("'", '"')
+        ob = json.loads(string)
+        if not classname:
+            self.display("class name missing")
+        elif classname not in storage.classes():
+            self.display("class doesn't exist")
+        elif uid is None:
+            self.display("instance id missing")
+        else:
+            key = "{}.{}".format(classname, uid)
+            if key not in storage.all():
+                self.display("no instance found")
+            else:
+                attributes = storage.attributes()[classname]
+                for attribute, value in ob.items():
+                    if attribute in attributes:
+                        value = attributes[attribute](value)
+                    setattr(storage.all()[key], attribute, value)
+                storage.all()[key].save()
 
     def do_count(self, line):
         """
