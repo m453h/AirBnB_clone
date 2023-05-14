@@ -178,20 +178,18 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and id by adding
         or updating attribute (save the change into the JSON file).
         """
+        instance = " ".join(line.split())
+        instance = instance.split(' ')
+
         if not line:
             self.display("class name missing")
             return
 
-        r = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
-        match = re.search(r, line)
-        if not match:
-            self.display("class name missing")
-            return
-
-        classname = match.group(1)
-        uid = match.group(2)
-        attribute = match.group(3)
-        value = match.group(4)
+        classname = instance[0] if len(instance) > 0 else None
+        uid = instance[1] if len(instance) > 1 else None
+        attribute = instance[2] if len(instance) > 2 else None
+        value = instance[3] if len(instance) > 3 else None
+        print(classname)
 
         if classname not in storage.classes():
             self.display("class doesn't exist")
