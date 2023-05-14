@@ -69,8 +69,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(hasattr(FileStorage, "_FileStorage__file_path"))
         self.assertTrue(hasattr(FileStorage, "_FileStorage__objects"))
 
-    def file_storage_save_action(self, classname):
-        """Helper method for save() method of the FileStorage class."""
+    def helper_file_storage_save(self, classname):
+        """Helper method to test for save() method of the FileStorage class."""
         cls = storage.classes().get(classname)
         if cls is None:
             raise ValueError(f"Invalid classname '{classname}'")
@@ -91,31 +91,71 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save_base_model(self):
         """Tests save() method for BaseModel class."""
-        self.file_storage_save_action("BaseModel")
+        self.helper_file_storage_save("BaseModel")
 
     def test_save_user_class(self):
         """Tests save() method for User class."""
-        self.file_storage_save_action("User")
+        self.helper_file_storage_save("User")
 
     def test_save_state_class(self):
         """Tests save() method for State class."""
-        self.file_storage_save_action("State")
+        self.helper_file_storage_save("State")
 
     def test_save_city_class(self):
         """Tests save() method for City class."""
-        self.file_storage_save_action("City")
+        self.helper_file_storage_save("City")
 
     def test_save_amenity_class(self):
         """Tests save() method for Amenity class."""
-        self.file_storage_save_action("Amenity")
+        self.helper_file_storage_save("Amenity")
 
     def test_save_place_class(self):
         """Tests save() method for Place class."""
-        self.file_storage_save_action("Place")
+        self.helper_file_storage_save("Place")
 
     def test_save_review_class(self):
         """Tests save() method for Review class."""
-        self.file_storage_save_action("Review")
+        self.helper_file_storage_save("Review")
+
+    def helper_test_new(self, classname):
+        """Helper method to test for new() method of the FileStorage class."""
+        cls = storage.classes().get(classname)
+        if cls is None:
+            raise ValueError(f"Invalid classname '{classname}'")
+        obj = cls()
+        storage.new(obj)
+        key = f"{type(obj).__name__}.{obj.id}"
+        objects_dict = FileStorage._FileStorage__objects
+        self.assertIn(key, objects_dict)
+        self.assertIs(objects_dict[key], obj)
+
+    def test_new_base_model(self):
+        """Tests new() method for BaseModel class."""
+        self.helper_test_new("BaseModel")
+
+    def test_new_user(self):
+        """Tests new() method for User class."""
+        self.helper_test_new("User")
+
+    def test_new_state(self):
+        """Tests new() method for State class."""
+        self.helper_test_new("State")
+
+    def test_new_city(self):
+        """Tests new() method for City class."""
+        self.helper_test_new("City")
+
+    def test_new_amenity(self):
+        """Tests new() method for Amenity class."""
+        self.helper_test_new("Amenity")
+
+    def test_new_place(self):
+        """Tests new() method for Place class."""
+        self.helper_test_new("Place")
+
+    def test_new_review(self):
+        """Tests new() method for Review class."""
+        self.helper_test_new("Review")
 
 
 if __name__ == '__main__':
