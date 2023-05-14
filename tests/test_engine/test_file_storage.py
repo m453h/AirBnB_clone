@@ -43,7 +43,9 @@ class TestFileStorage(unittest.TestCase):
             FileStorage.__init__()
 
     def test_filestorage_init_with_multi_args(self):
-        """Tests initialization of FileStorage class with multiple arguments."""
+        """
+        Tests initialization of FileStorage class with multiple arguments.
+        """
         FileStorage.__init__(200, "School", "ALX", "Python", "C")
 
     def test_create_new_instance_class(self):
