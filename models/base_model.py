@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This script is for the base model"""
+"""This module creates the base model for the AirBnb Clone project"""
 
 import uuid
 from datetime import datetime
@@ -8,16 +8,19 @@ from models import storage
 
 class BaseModel:
 
-    """A class from which other classes will inherit from"""
+    """
+    Represents the Base Class in which all classes
+    the AirBnb clone project will inherit from
+    """
 
     def __init__(self, *args, **kwargs):
-        """Initialize the instance attributes
+        """
+        Constructor method to initialize the instance attributes
 
         Args:
             - *args: list of arguments
             - **kwargs: dict of key-values arguments
         """
-
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
                 if key == "created_at":
@@ -35,20 +38,26 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """Return the string representation"""
+        """
+        Returns the string representation of BaseModel instance
+        """
 
-        return "[{}] ({}) {}".\
-            format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            type(self).__name__,
+            self.id,
+            self.__dict__)
 
     def save(self):
-        """now update the public instance attribute updated_at"""
-
+        """
+        Method to update the instance attribute: updated_at
+        """
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """return a dictionary that contains all keys/values of __dict__"""
-
+        """
+        Returns a dictionary that contains all keys/values of __dict__
+        """
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__
         my_dict["created_at"] = my_dict["created_at"].isoformat()
