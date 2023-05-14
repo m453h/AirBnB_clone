@@ -41,7 +41,6 @@ class BaseModel:
         """
         Returns the string representation of BaseModel instance
         """
-
         return "[{}] ({}) {}".format(
             type(self).__name__,
             self.id,
