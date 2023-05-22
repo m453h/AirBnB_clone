@@ -1,5 +1,6 @@
 section.places {
     text-align: center;
+    padding-bottom: 50px;
 }
 section.places h1 {
     font-size: 30px;
@@ -67,10 +68,69 @@ div.number_bathrooms {
 
 div.user{
     text-align: left;
-    height: 180px;
+    min-height: 163px;
     margin-top: 20px;
 }
 
 .user br {
     margin-bottom: 10px;
+}
+
+article div.amenities, article div.reviews{
+    text-align: left;
+    margin-top: 40px;
+}
+
+article div.amenities h2, article div.reviews h2{
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDDDDD;
+    width: 100%;
+}
+
+article div.amenities ul {
+    padding: 0;
+    margin: 0;
+}
+article div.amenities ul li{
+    list-style: none;
+    margin-bottom: 10px;
+    padding-left: 25px;
+}
+
+.amenities .icon{
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+}
+
+.amenities .icon.pet{
+    background-image: url(../images/icon_pets.png);
+}
+
+.amenities .icon.tv{
+    background-image: url(../images/icon_tv.png);
+}
+
+.amenities .icon.wifi{
+    background-image: url(../images/icon_wifi.png);
+}
+
+article div.reviews ul {
+    padding: 0;
+    margin: 0;
+}
+
+article div.reviews ul li{
+    list-style: none;
+}
+
+article div.reviews h3 {
+    font-size: 14px;
+    margin: 0;
+}
+
+article div.reviews p {
+    font-size: 12px;
+    margin-top: 5px;
 }

@@ -22,24 +22,24 @@ section.filters button:hover{
     opacity: 90%
 }
 
-div.locations, div.amenities {
+div.locations, section.filters div.amenities {
     height: 100%;
     width: 25%;
     border-right: 1px solid #DDDDDD;
     float:left;
 }
 
-div.amenities{
+section.filters div.amenities{
     border: 0;
 }
 
-div.locations h3, div.amenities h3{
+div.locations h3, section.filters div.amenities h3{
     font-size: 16px;
     font-weight: 600;
     margin: 20px 0 0 30px;
 }
 
-div.locations h4, div.amenities h4{
+div.locations h4, section.filters div.amenities h4{
     font-weight: 400;
     font-size: 14px;
     margin-top:0;
@@ -67,6 +67,6 @@ div.locations h4, div.amenities h4{
     margin-bottom: 12px;
 }
 
-.locations:hover .popover, .amenities:hover .popover {
+.locations:hover .popover, section.filters .amenities:hover .popover {
     display: block;
 }
